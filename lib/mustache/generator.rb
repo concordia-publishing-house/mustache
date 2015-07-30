@@ -134,7 +134,7 @@ class Mustache
         #{proc_handling}
       when Array, Enumerator, Mustache::Enumerable
         v.map { |_| ctx.push(_); r = #{code}; ctx.pop; r }.join
-      else
+      elsif !v.nil? && !(v.respond_to?(:empty?) && v.empty?)
         ctx.push(v); r = #{code}; ctx.pop; r
       end
       compiled
